@@ -1,8 +1,5 @@
 const choices = ["rock", "paper", "scissors"];
 
-let humanScore = 0;
-let computerScore = 0;
-
 const isChoiceValid = (str) => {
   if (typeof str != "string") return false;
 
@@ -34,25 +31,28 @@ const getHumanChoice = () => {
 const capitalize = (str) =>
   str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
-const playRound = (humanChoice, computerChoice) => {
-  const outcomes = {
-    rock: "scissors",
-    paper: "rock",
-    scissors: "paper",
+const playGame = () => {
+  let humanScore = 0;
+  let computerScore = 0;
+
+  const playRound = (humanChoice, computerChoice) => {
+    const outcomes = {
+      rock: "scissors",
+      paper: "rock",
+      scissors: "paper",
+    };
+
+    if (humanChoice === computerChoice) {
+      alert("Tie!");
+    } else if (outcomes[humanChoice] === computerChoice) {
+      alert(`You win! ${capitalize(humanChoice)} beats ${computerChoice}!`);
+      humanScore++;
+    } else {
+      alert(`You lose! ${capitalize(computerChoice)} beats ${humanChoice}!`);
+      computerScore++;
+    }
   };
 
-  if (humanChoice === computerChoice) {
-    alert("Tie!");
-  } else if (outcomes[humanChoice] === computerChoice) {
-    alert(`You win! ${capitalize(humanChoice)} beats ${computerChoice}!`);
-    humanScore++;
-  } else {
-    alert(`You lose! ${capitalize(computerChoice)} beats ${humanChoice}!`);
-    computerScore++;
-  }
-};
-
-const playGame = () => {
   for (let i = 0; i < 5; i++) {
     const humanChoice = getHumanChoice();
     const computerChoice = getComputerChoice();
