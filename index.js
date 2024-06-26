@@ -52,7 +52,22 @@ const playRound = (humanChoice, computerChoice) => {
   }
 };
 
-const humanChoice = getHumanChoice();
-const computerChoice = getComputerChoice();
+const playGame = () => {
+  for (let i = 0; i < 5; i++) {
+    const humanChoice = getHumanChoice();
+    const computerChoice = getComputerChoice();
 
-playRound(humanChoice, computerChoice);
+    playRound(humanChoice, computerChoice);
+  }
+
+  const scoreRestartMessage = `(${humanScore} vs ${computerScore})! Restart the page to play a new game!`;
+  if (humanScore > computerScore) {
+    alert(`You won the game ${scoreRestartMessage}`);
+  } else if (computerScore > humanScore) {
+    alert(`You lost the game ${scoreRestartMessage}`);
+  } else {
+    alert(`Tie ${scoreRestartMessage}`);
+  }
+};
+
+playGame();
