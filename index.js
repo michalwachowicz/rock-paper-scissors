@@ -1,5 +1,8 @@
 const choices = ["rock", "paper", "scissors"];
 
+let humanScore = 0;
+let computerScore = 0;
+
 const isChoiceValid = (str) => {
   if (typeof str != "string") return false;
 
@@ -27,5 +30,3 @@ const getHumanChoice = () => {
 
   return choice;
 };
-
-console.log(getHumanChoice());
