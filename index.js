@@ -12,22 +12,6 @@ const isChoiceValid = (str) => {
   return false;
 };
 
-const getComputerChoice = () => {
-  return choices[Math.floor(Math.random() * choices.length)];
-};
-
-const getHumanChoice = () => {
-  let choice;
-
-  do {
-    choice = prompt(
-      "What's your choice? (rock | paper | scissors)"
-    ).toLowerCase();
-  } while (!isChoiceValid(choice));
-
-  return choice;
-};
-
 const capitalize = (str) =>
   str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
@@ -70,4 +54,14 @@ const playGame = () => {
   }
 };
 
-playGame();
+// playGame();
+const gameButtons = document.querySelector(".gamebutton-container");
+
+gameButtons.addEventListener("click", (e) => {
+  const gameButton = e.target.parentNode;
+
+  if (gameButton.type === "submit" && gameButton.id) {
+    const humanChoice = gameButton.id;
+    if (!isChoiceValid(humanChoice)) return;
+  }
+});
