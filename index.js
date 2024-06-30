@@ -1,3 +1,4 @@
+const score = document.querySelector(".score");
 const gameButtons = document.querySelector(".gamebutton-container");
 
 const choices = ["rock", "paper", "scissors"];
@@ -29,6 +30,8 @@ const playRound = (humanChoice, computerChoice) => {
     alert(`You lose! ${capitalize(computerChoice)} beats ${humanChoice}!`);
     computerScore++;
   }
+
+  score.textContent = `${humanScore} : ${computerScore}`;
 };
 
 gameButtons.addEventListener("click", (e) => {
