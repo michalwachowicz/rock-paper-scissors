@@ -1,16 +1,6 @@
 const choices = ["rock", "paper", "scissors"];
 
-const isChoiceValid = (str) => {
-  if (typeof str != "string") return false;
-
-  for (let choice of choices) {
-    if (str === choice) {
-      return true;
-    }
-  }
-
-  return false;
-};
+const isChoiceValid = (str) => typeof str === "string" && choices.includes(str);
 
 const capitalize = (str) =>
   str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
