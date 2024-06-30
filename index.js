@@ -1,4 +1,5 @@
 const score = document.querySelector(".score");
+const roundResult = document.querySelector(".round-result");
 const gameButtons = document.querySelector(".gamebutton-container");
 
 const choices = ["rock", "paper", "scissors"];
@@ -22,12 +23,16 @@ const playRound = (humanChoice, computerChoice) => {
   };
 
   if (humanChoice === computerChoice) {
-    alert("Tie!");
+    roundResult.textContent = "Tie!";
   } else if (outcomes[humanChoice] === computerChoice) {
-    alert(`You win! ${capitalize(humanChoice)} beats ${computerChoice}!`);
+    roundResult.textContent = `You win! ${capitalize(
+      humanChoice
+    )} beats ${computerChoice}!`;
     humanScore++;
   } else {
-    alert(`You lose! ${capitalize(computerChoice)} beats ${humanChoice}!`);
+    roundResult.textContent = `You lose! ${capitalize(
+      computerChoice
+    )} beats ${humanChoice}!`;
     computerScore++;
   }
 
