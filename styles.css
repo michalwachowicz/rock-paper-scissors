@@ -9,3 +9,47 @@
 body {
   font-family: "Lato", Arial, Helvetica, sans-serif;
 }
+
+h1 {
+  margin-bottom: 24px;
+  font-size: 48px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 64px 32px;
+  background-color: #eddc6f;
+}
+
+.score-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.score {
+  font-size: 48px;
+  font-weight: 200;
+}
+
+.competitor {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.gamebutton-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 36px;
+}
+
+.gamebutton {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
