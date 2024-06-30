@@ -46,10 +46,16 @@ h1 {
   justify-content: center;
   flex-wrap: wrap;
   gap: 36px;
+  margin-bottom: 36px;
 }
 
 .gamebutton {
   background: none;
   border: none;
   cursor: pointer;
+}
+
+.round-result {
+  font-size: 24px;
+  text-align: center;
 }
