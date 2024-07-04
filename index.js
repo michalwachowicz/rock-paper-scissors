@@ -36,7 +36,7 @@ const restartGame = () => {
 // A function created to avoid the callback hell in animate() function
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const animate = async (gameButton) => {
+const animate = async (gameButton, roundOutcome, computerChoice) => {
   const computerButton = document.querySelector(".computer-choice");
 
   animating = true;
@@ -59,11 +59,11 @@ const animate = async (gameButton) => {
   computerButton.classList.remove("hidden");
   await delay(500);
 
+  computerButton.children[0].src = `./resources/${computerChoice}.svg`;
   computerButton.style.opacity = "1";
-  // TODO: Show winner
-  // TODO: updateScore
-  // TODO: Set computer choice image
+  roundResult.textContent = roundOutcome;
 
+  updateScore();
   await delay(1000);
 
   computerButton.style.opacity = "0";
@@ -88,28 +88,28 @@ const playRound = (humanChoice, computerChoice) => {
     paper: "rock",
     scissors: "paper",
   };
+  let roundOutcome;
 
   if (humanChoice === computerChoice) {
-    roundResult.textContent = "Tie!";
+    roundOutcome = "Tie!";
   } else if (outcomes[humanChoice] === computerChoice) {
-    roundResult.textContent = `You win! ${capitalize(
+    roundOutcome = `You win! ${capitalize(
       humanChoice
     )} beats ${computerChoice}!`;
     humanScore++;
   } else {
-    roundResult.textContent = `You lose! ${capitalize(
+    roundOutcome = `You lose! ${capitalize(
       computerChoice
     )} beats ${humanChoice}!`;
     computerScore++;
   }
 
   if (humanScore >= 5 || computerScore >= 5) {
-    gameResult.textContent =
-      humanScore > computerScore ? "You won!" : "You lost!";
+    roundOutcome = humanScore > computerScore ? "You won!" : "You lost!";
     newGameContainer.classList.remove("hidden");
   }
 
-  updateScore();
+  return roundOutcome;
 };
 
 gameButtonContainer.addEventListener("click", (e) => {
@@ -120,8 +120,9 @@ gameButtonContainer.addEventListener("click", (e) => {
     if (!isChoiceValid(humanChoice)) return;
 
     const computerChoice = getComputerChoice();
-    playRound(humanChoice, computerChoice);
-    animate(gameButton);
+    const roundOutcome = playRound(humanChoice, computerChoice);
+
+    animate(gameButton, roundOutcome, computerChoice);
   }
 });
 
