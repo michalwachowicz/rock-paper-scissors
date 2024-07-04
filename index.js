@@ -59,11 +59,14 @@ const animate = async (gameButton) => {
 
   computerButton.style.opacity = "1";
   // TODO: Show winner
+  // TODO: updateScore
+
   await delay(1000);
 
   computerButton.style.opacity = "0";
   await delay(500);
 
+  computerButton.classList.add("hidden");
   gameButton.style.transform = "translateX(0)";
   gameButtons.forEach((btn) => {
     if (btn !== gameButton) btn.style.display = "initial";
