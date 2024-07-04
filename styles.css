@@ -60,6 +60,7 @@ h1 {
 .gamebutton {
   background: none;
   border: none;
+  transition: opacity 0.5s, transform 0.5s;
 }
 
 .round-result {
@@ -109,9 +110,28 @@ h1 {
 .computer-choice {
   position: absolute;
   transform: translateX(100px);
+  transition: opacity 0.5s;
   opacity: 0;
 }
 
 .computer-choice > img {
   transform: scaleX(-1);
+}
+
+@keyframes shake {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-10px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  75% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }

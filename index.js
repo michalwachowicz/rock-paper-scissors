@@ -1,7 +1,8 @@
 const score = document.querySelector(".score");
 const roundResult = document.querySelector(".round-result");
 const gameResult = document.querySelector(".game-result");
-const gameButtons = document.querySelector(".gamebutton-container");
+const gameButtonContainer = document.querySelector(".gamebutton-container");
+const gameButtons = document.querySelectorAll(".gamebutton");
 const newGameContainer = document.querySelector(".newgame-container");
 const restartButton = document.querySelector(".restart-btn");
 
@@ -29,6 +30,49 @@ const restartGame = () => {
   updateScore();
   roundResult.textContent = "";
   newGameContainer.classList.add("hidden");
+};
+
+// A function created to avoid the callback hell in animate() function
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const animate = async (gameButton) => {
+  const computerButton = document.querySelector(".computer-choice");
+
+  gameButtons.forEach((btn) => (btn.style.animation = "shake 0.5s ease"));
+  await delay(500);
+
+  gameButtons.forEach((btn) => {
+    btn.style.animation = "";
+    if (btn !== gameButton) btn.style.opacity = 0;
+  });
+  await delay(500);
+
+  gameButtons.forEach((btn) => {
+    if (btn !== gameButton) {
+      btn.style.display = "none";
+    }
+  });
+
+  gameButton.style.transform = "translateX(-100px)";
+  computerButton.classList.remove("hidden");
+  await delay(500);
+
+  computerButton.style.opacity = "1";
+  // TODO: Show winner
+  await delay(1000);
+
+  computerButton.style.opacity = "0";
+  await delay(500);
+
+  gameButton.style.transform = "translateX(0)";
+  gameButtons.forEach((btn) => {
+    if (btn !== gameButton) btn.style.display = "initial";
+  });
+  await delay(500);
+
+  gameButtons.forEach((btn) => {
+    if (btn !== gameButton) btn.style.opacity = "1";
+  });
 };
 
 const playRound = (humanChoice, computerChoice) => {
@@ -61,7 +105,7 @@ const playRound = (humanChoice, computerChoice) => {
   updateScore();
 };
 
-gameButtons.addEventListener("click", (e) => {
+gameButtonContainer.addEventListener("click", (e) => {
   const gameButton = e.target.parentNode;
 
   if (gameButton.type === "submit" && gameButton.id) {
@@ -70,6 +114,7 @@ gameButtons.addEventListener("click", (e) => {
 
     const computerChoice = getComputerChoice();
     playRound(humanChoice, computerChoice);
+    animate(gameButton);
   }
 });
 
