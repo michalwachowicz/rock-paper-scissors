@@ -10,6 +10,7 @@ const choices = ["rock", "paper", "scissors"];
 
 let humanScore = 0;
 let computerScore = 0;
+let animating = false;
 
 const isChoiceValid = (str) => typeof str === "string" && choices.includes(str);
 
@@ -38,6 +39,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const animate = async (gameButton) => {
   const computerButton = document.querySelector(".computer-choice");
 
+  animating = true;
   gameButtons.forEach((btn) => (btn.style.animation = "shake 0.5s ease"));
   await delay(500);
 
@@ -60,6 +62,7 @@ const animate = async (gameButton) => {
   computerButton.style.opacity = "1";
   // TODO: Show winner
   // TODO: updateScore
+  // TODO: Set computer choice image
 
   await delay(1000);
 
@@ -76,6 +79,7 @@ const animate = async (gameButton) => {
   gameButtons.forEach((btn) => {
     if (btn !== gameButton) btn.style.opacity = "1";
   });
+  animating = false;
 };
 
 const playRound = (humanChoice, computerChoice) => {
@@ -111,7 +115,7 @@ const playRound = (humanChoice, computerChoice) => {
 gameButtonContainer.addEventListener("click", (e) => {
   const gameButton = e.target.parentNode;
 
-  if (gameButton.type === "submit" && gameButton.id) {
+  if (!animating && gameButton.type === "submit" && gameButton.id) {
     const humanChoice = gameButton.id;
     if (!isChoiceValid(humanChoice)) return;
 
